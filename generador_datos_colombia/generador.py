@@ -122,6 +122,26 @@ def _calcular_edad(fecha_nac_str, fecha_referencia):
         return edad
     except ValueError:
         return None
+def imprimir(data):
+
+
+    cla_list = list(data.keys())
+    longitudes = [len(data[cla]) for cla in cla_list]
+
+
+
+    ancho_columnas = {cla: max(len(cla), max((len(str(item)) for item in data[cla]), default=0)) + 2 for cla in cla_list}
+
+    # Imprimir encabezado
+    encabezado = " | ".join(f"{cla:<{ancho_columnas[cla]}}" for cla in cla_list)
+    print(encabezado)
+    print("-" * len(encabezado))
+
+    # Imprimir filas
+    num_filas = longitudes[0]
+    for i in range(num_filas):
+        fila = " | ".join(f"{str(data[cla][i]):<{ancho_columnas[cla]}}" for cla in cla_list)
+        print(fila)
 
 # --- FUNCIÓN PRINCIPAL DE LA LIBRERÍA ---
 def crear_base_datos_simulada(num_registros=43, edad_min=5, edad_max=87):
